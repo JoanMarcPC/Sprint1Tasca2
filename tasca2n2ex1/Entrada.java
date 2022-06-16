@@ -8,28 +8,28 @@ public class Entrada {
 	static Scanner input = new Scanner(System.in);
 
 	public static byte llegirByte(String message) throws InputMismatchException {
-		
+
 		byte dato = 0;
 		boolean ok = false;
-		while (!ok)
+		do {
 			try {
 				System.out.println(message);
 				dato = input.nextByte();
 				ok = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Error de format. Hauràs de tornar-ho a intentar");
-				ok = false;
-				input.next();
+				input.nextLine();
 			}
-		
+		} while (!ok);
+
 		return dato;
 	}
 
-	public static int llegirInt(String message)  {
+	public static int llegirInt(String message) {
 
 		int dato = 0;
 		boolean ok = false;
-		while (!ok) {
+		do {
 
 			try {
 				System.out.println(message);
@@ -37,20 +37,19 @@ public class Entrada {
 				ok = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Error de format. Hauràs de tornar-ho a intentar");
-				ok = false;
-				input.next();
+				input.nextLine();
 			}
 
-		}
-		
+		} while (!ok);
+
 		return dato;
 	}
 
-	public static float llegirFloat(String message) throws InputMismatchException {
+	public static float llegirFloat(String message) {
 
 		float dato = 0;
 		boolean ok = false;
-		while (!ok) {
+		do {
 
 			try {
 				System.out.println(message);
@@ -58,20 +57,19 @@ public class Entrada {
 				ok = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Error de format. Hauràs de tornar-ho a intentar");
-				ok = false;
-				input.next();
+				input.nextLine();
 			}
 
-		}
-		
+		} while (!ok);
+
 		return dato;
 	}
 
-	public static double llegirDouble(String message) throws InputMismatchException {
+	public static double llegirDouble(String message) {
 
 		double dato = 0;
 		boolean ok = false;
-		while (!ok) {
+		do {
 
 			try {
 				System.out.println(message);
@@ -79,43 +77,70 @@ public class Entrada {
 				ok = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Error de format. Hauràs de tornar-ho a intentar");
-				ok = false;
-				input.next();
+				input.nextLine();
 			}
 
-		}
-		
+		} while (!ok);
+
 		return dato;
 	}
 
-	public static char llegirChar(String message) throws Exception {
+	public static char llegirChar(String message) {
 		String dato = "aa";
 
-		while (dato.length() != 1) {
-			System.out.println(message);
-			dato = input.nextLine();
-			if (dato.length() != 1) {
-				System.out.println("Introdueix només un caracter, si us plau");
+		do {
+			try {
+				System.out.println(message);
+				dato = input.nextLine();
+				if (dato.length() != 1) {
+					throw new Exception();
 
+				}
+			} catch (Exception e) {
+				System.out.println("Introdueix només un caracter, si us plau");
 			}
-		}
+
+		} while (dato.length() != 1);
 		return dato.charAt(0);
 
 	}
 
-	public static String llegirString(String message) throws Exception {
+	public static String llegirString(String message) { // aqui perque hauria de fer saltar una
+														// excepcio?¿?¿
 		String dato = "";
-		
-		
+
 		System.out.println(message);
-		
+
 		dato = input.nextLine();
-		
-		
+
 		return dato;
 	}
 
 	public static boolean llegirSiNo(String message) {
-		return true;
+		String dato = "";
+		boolean ok = false;
+		boolean retorn = false;
+		System.out.println(message);
+
+		do {
+			try {
+				dato = input.nextLine();
+				if (dato.equalsIgnoreCase("s")) {
+					ok = true;
+					retorn = true;
+
+				} else if (dato.equalsIgnoreCase("n")) {
+					ok = true;
+					retorn = false;
+				} else {
+
+					throw new Exception();
+
+				}
+			} catch (Exception e) {
+				System.out.println("Introdueix només s o n");
+			}
+		} while (!ok);
+		return retorn;
 	}
 }
